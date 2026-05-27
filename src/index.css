@@ -1,0 +1,1511 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .animate-fade-in {
+    animation: appFadeIn 0.35s ease-out both;
+  }
+  .animate-skeleton {
+    animation: skeletonShimmer 1.25s ease-in-out infinite;
+  }
+  .toast-slide-in {
+    animation: toastSlideIn 0.32s ease-out both;
+  }
+  .toast-slide-in-top {
+    animation: toastSlideInTop 0.28s ease-out both;
+  }
+  .page-tab-fade {
+    animation: appFadeIn 0.28s ease-out both;
+  }
+  .ai-quota-attention {
+    animation: aiQuotaSoftPulse 2.8s ease-in-out infinite;
+  }
+  .ai-quota-bar-pulse {
+    animation: aiQuotaBarGlow 2.8s ease-in-out infinite;
+  }
+}
+
+@keyframes appFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes skeletonShimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes aiQuotaSoftPulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 1px rgba(251, 146, 60, 0.2),
+      0 4px 16px -6px rgba(234, 88, 12, 0.12);
+  }
+  50% {
+    box-shadow:
+      0 0 0 1px rgba(251, 146, 60, 0.45),
+      0 8px 28px -6px rgba(234, 88, 12, 0.22);
+  }
+}
+
+@keyframes aiQuotaBarGlow {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.08);
+  }
+}
+
+@keyframes toastSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes toastSlideInTop {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* LoveQuest onboarding — 獨立全螢幕，不透明粉白漸層 */
+.lq-onboarding-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  isolation: isolate;
+  min-height: 100dvh;
+  height: 100dvh;
+  width: 100%;
+  overflow: hidden;
+  background-color: #fdf4f8;
+  background-image:
+    radial-gradient(ellipse 95% 70% at 50% -12%, rgba(251, 207, 232, 0.55), transparent 58%),
+    radial-gradient(ellipse 80% 55% at 100% 8%, rgba(233, 213, 255, 0.35), transparent 52%),
+    radial-gradient(ellipse 70% 48% at 0% 35%, rgba(252, 231, 243, 0.65), transparent 55%),
+    linear-gradient(180deg, #fceef6 0%, #fef9fb 42%, #f8f2f6 100%);
+}
+
+.lq-onboarding-glow {
+  pointer-events: none;
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(48px);
+}
+
+.lq-onboarding-glow--tl {
+  top: -2rem;
+  right: -1.5rem;
+  height: 12rem;
+  width: 12rem;
+  background: rgba(251, 182, 206, 0.45);
+}
+
+.lq-onboarding-glow--br {
+  bottom: 5rem;
+  left: -2rem;
+  height: 10rem;
+  width: 10rem;
+  background: rgba(233, 213, 255, 0.4);
+}
+
+.lq-onboarding-glass-card {
+  border-radius: 1.5rem;
+  border: 1px solid rgba(251, 207, 232, 0.65);
+  background: linear-gradient(
+    165deg,
+    rgba(255, 255, 255, 0.94) 0%,
+    rgba(255, 248, 252, 0.9) 48%,
+    rgba(254, 242, 248, 0.88) 100%
+  );
+  box-shadow:
+    0 18px 48px -16px rgba(244, 114, 182, 0.28),
+    0 4px 20px -8px rgba(216, 180, 254, 0.12),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(14px);
+}
+
+@keyframes onboardingSlideForward {
+  from {
+    opacity: 0;
+    transform: translateX(14px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes onboardingSlideBack {
+  from {
+    opacity: 0;
+    transform: translateX(-14px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+.lq-onboarding-slide-forward {
+  animation: onboardingSlideForward 0.32s ease-out both;
+}
+
+.lq-onboarding-slide-back {
+  animation: onboardingSlideBack 0.32s ease-out both;
+}
+
+/* LoveQuest legal pages */
+.lq-legal-page {
+  background-color: #fdf4f8;
+  background-image:
+    radial-gradient(ellipse 100% 60% at 50% -10%, rgba(251, 207, 232, 0.35), transparent 55%),
+    radial-gradient(ellipse 70% 45% at 100% 20%, rgba(252, 231, 243, 0.4), transparent 50%),
+    linear-gradient(180deg, #fceef6 0%, #fef9fb 45%, #f7f3f6 100%);
+}
+
+/* LoveQuest App Store Showcase */
+html.lq-showcase-screenshot-active,
+html.lq-showcase-screenshot-active body {
+  overflow: hidden !important;
+  height: 100%;
+  overscroll-behavior: none;
+}
+
+html.lq-showcase-hub-active {
+  scroll-behavior: smooth;
+}
+
+/* App Store 原生截圖頁 — 固定 1284×2778，Playwright / DevTools 所見即所得 */
+html.lq-app-store-screenshot-page,
+html.lq-app-store-screenshot-page body {
+  margin: 0;
+  padding: 0;
+  width: 1284px;
+  height: 2778px;
+  overflow: hidden;
+  background-color: #fff9fc;
+}
+
+.lq-native-screenshot-root {
+  width: 1284px;
+  height: 2778px;
+  overflow: hidden;
+}
+
+.lq-native-screenshot-canvas,
+.lq-native-screenshot-canvas * {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  mix-blend-mode: normal !important;
+}
+
+.lq-native-screenshot-canvas .lq-showcase-phone {
+  animation: none !important;
+}
+
+.lq-showcase-canvas {
+  isolation: isolate;
+}
+
+/* Soft glows without filter:blur — html2canvas renders blur as gray wash */
+.lq-showcase-orb {
+  pointer-events: none;
+  position: absolute;
+  border-radius: 9999px;
+  filter: none;
+}
+
+.lq-showcase-canvas-spotlight {
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: auto;
+  height: 38%;
+  background: radial-gradient(
+    ellipse 95% 90% at 50% 0%,
+    rgba(255, 255, 255, 0.28) 0%,
+    rgba(255, 241, 246, 0.12) 45%,
+    transparent 72%
+  );
+}
+
+.lq-showcase-sparkle {
+  pointer-events: none;
+  position: absolute;
+  z-index: 5;
+  width: 14px;
+  height: 14px;
+  opacity: 0.55;
+  background:
+    linear-gradient(0deg, transparent 42%, rgba(255, 255, 255, 0.95) 50%, transparent 58%),
+    linear-gradient(90deg, transparent 42%, rgba(255, 255, 255, 0.95) 50%, transparent 58%);
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.8));
+  animation: lqShowcaseTwinkle 3.6s ease-in-out infinite;
+}
+
+.lq-showcase-sparkle--1 {
+  top: 11%;
+  left: 14%;
+  width: 18px;
+  height: 18px;
+}
+
+.lq-showcase-sparkle--2 {
+  top: 16%;
+  right: 18%;
+  animation-delay: 0.7s;
+}
+
+.lq-showcase-sparkle--3 {
+  top: 22%;
+  left: 8%;
+  width: 10px;
+  height: 10px;
+  opacity: 0.4;
+  animation-delay: 1.2s;
+}
+
+.lq-showcase-sparkle--4 {
+  top: 19%;
+  right: 10%;
+  width: 12px;
+  height: 12px;
+  animation-delay: 0.3s;
+}
+
+.lq-showcase-sparkle--5 {
+  top: 28%;
+  left: 22%;
+  width: 8px;
+  height: 8px;
+  opacity: 0.35;
+  animation-delay: 1.8s;
+}
+
+.lq-showcase-sparkle--6 {
+  top: 26%;
+  right: 24%;
+  width: 9px;
+  height: 9px;
+  opacity: 0.38;
+  animation-delay: 2.2s;
+}
+
+.lq-showcase-sparkle--7 {
+  top: 32%;
+  left: 18%;
+  width: 11px;
+  height: 11px;
+  opacity: 0.42;
+  animation-delay: 0.5s;
+}
+
+.lq-showcase-sparkle--8 {
+  top: 14%;
+  left: 42%;
+  width: 8px;
+  height: 8px;
+  opacity: 0.36;
+  animation-delay: 1.5s;
+}
+
+.lq-showcase-sparkle--9 {
+  top: 24%;
+  right: 32%;
+  width: 13px;
+  height: 13px;
+  opacity: 0.44;
+  animation-delay: 2.6s;
+}
+
+.lq-showcase-float-heart {
+  position: absolute;
+  font-size: 1.35rem;
+  line-height: 1;
+  opacity: 0.42;
+  animation: lqShowcaseFloat 3.8s ease-in-out infinite;
+  pointer-events: none;
+  text-shadow: 0 4px 14px rgba(244, 114, 182, 0.4);
+}
+
+.lq-showcase-float-heart--1 {
+  top: 12%;
+  left: 10%;
+  animation-delay: 0.3s;
+}
+
+.lq-showcase-float-heart--2 {
+  top: 18%;
+  right: 12%;
+  font-size: 1.1rem;
+  animation-delay: 1.1s;
+}
+
+.lq-showcase-float-heart--3 {
+  top: 34%;
+  left: 6%;
+  font-size: 1rem;
+  opacity: 0.35;
+  animation-delay: 1.9s;
+}
+
+.lq-showcase-hero-heart {
+  position: absolute;
+  top: 19%;
+  right: 11%;
+  z-index: 6;
+  font-size: 2.75rem;
+  line-height: 1;
+  filter: drop-shadow(0 8px 16px rgba(244, 114, 182, 0.45));
+  animation: lqShowcaseFloat 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Pink glow lives on .lq-showcase-phone frame shadow — not a layer over the screen */
+
+.lq-showcase-orb--tl {
+  top: -3rem;
+  left: -2.5rem;
+  width: 16rem;
+  height: 16rem;
+  background: radial-gradient(circle at 35% 35%, rgba(255, 255, 255, 0.5) 0%, transparent 68%);
+}
+
+.lq-showcase-orb--tr {
+  top: 0.5rem;
+  right: -2.5rem;
+  width: 15rem;
+  height: 15rem;
+  background: radial-gradient(circle at 65% 40%, rgba(252, 231, 243, 0.62) 0%, transparent 70%);
+}
+
+.lq-showcase-orb--tc {
+  top: 5%;
+  left: 50%;
+  width: 18rem;
+  height: 11rem;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse at 50% 50%, rgba(255, 255, 255, 0.38) 0%, transparent 72%);
+}
+
+.lq-showcase-orb--bl {
+  bottom: 2%;
+  left: -4rem;
+  width: 19rem;
+  height: 16rem;
+  background: radial-gradient(circle at 40% 60%, rgba(251, 182, 206, 0.55) 0%, transparent 72%);
+}
+
+.lq-showcase-orb--br {
+  bottom: 0;
+  right: -4rem;
+  width: 20rem;
+  height: 17rem;
+  background: radial-gradient(circle at 60% 55%, rgba(244, 114, 182, 0.42) 0%, transparent 72%);
+}
+
+.lq-showcase-hero {
+  max-height: none;
+}
+
+.lq-showcase-headline {
+  letter-spacing: -0.02em;
+}
+
+.lq-showcase-bottom-decor {
+  height: 22%;
+  z-index: 0;
+}
+
+.lq-showcase-phone-section {
+  z-index: 30;
+}
+
+.lq-showcase-phone-stage {
+  z-index: 1;
+}
+
+.lq-showcase-floor-glow {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  transform: translateX(-50%);
+  background: radial-gradient(
+    ellipse 90% 75% at 50% 100%,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(251, 207, 232, 0.13) 32%,
+    rgba(244, 114, 182, 0.04) 55%,
+    transparent 78%
+  );
+}
+
+
+.lq-showcase-float-icon {
+  position: absolute;
+  font-size: 1.85rem;
+  line-height: 1;
+  opacity: 0.38;
+  filter: none;
+  animation: lqShowcaseFloat 4.5s ease-in-out infinite;
+  text-shadow: 0 2px 12px rgba(244, 114, 182, 0.35);
+}
+
+.lq-showcase-float-icon--1 {
+  left: 5%;
+  bottom: 20%;
+  font-size: 1.65rem;
+  opacity: 0.32;
+}
+
+.lq-showcase-float-icon--2 {
+  right: 7%;
+  bottom: 24%;
+  animation-delay: 0.8s;
+  opacity: 0.3;
+}
+
+.lq-showcase-float-icon--3 {
+  left: 13%;
+  bottom: 12%;
+  font-size: 1.4rem;
+  animation-delay: 1.4s;
+  opacity: 0.34;
+}
+
+.lq-showcase-float-icon--4 {
+  right: 14%;
+  bottom: 14%;
+  font-size: 1.5rem;
+  animation-delay: 2s;
+  opacity: 0.33;
+}
+
+.lq-showcase-float-icon--5 {
+  left: 50%;
+  bottom: 11%;
+  transform: translateX(-50%);
+  font-size: 1.25rem;
+  animation-delay: 0.4s;
+  opacity: 0.3;
+}
+
+.lq-showcase-float-icon--6 {
+  left: 28%;
+  bottom: 8%;
+  font-size: 1.15rem;
+  animation-delay: 1.1s;
+  opacity: 0.28;
+}
+
+.lq-showcase-float-icon--7 {
+  right: 26%;
+  bottom: 9%;
+  font-size: 1.2rem;
+  animation-delay: 1.6s;
+  opacity: 0.29;
+}
+
+.lq-showcase-heart-dot {
+  position: absolute;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.45);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.5);
+  animation: lqShowcaseTwinkle 3.2s ease-in-out infinite;
+}
+
+.lq-showcase-heart-dot--1 {
+  width: 6px;
+  height: 6px;
+  left: 22%;
+  bottom: 22%;
+}
+
+.lq-showcase-heart-dot--2 {
+  width: 4px;
+  height: 4px;
+  right: 24%;
+  bottom: 24%;
+  animation-delay: 1.1s;
+}
+
+.lq-showcase-heart-dot--3 {
+  width: 5px;
+  height: 5px;
+  left: 68%;
+  bottom: 18%;
+  animation-delay: 0.6s;
+}
+
+@keyframes lqShowcaseTwinkle {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.15);
+  }
+}
+
+@keyframes lqShowcaseBreath {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: translateX(-50%) scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: translateX(-50%) scale(1.06);
+  }
+}
+
+@keyframes lqShowcaseFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes lqShowcaseFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.lq-showcase-fade-in {
+  animation: lqShowcaseFadeIn 0.45s ease-out both;
+}
+
+.lq-showcase-float {
+  animation: lqShowcaseFloat 3.2s ease-in-out infinite;
+}
+
+.lq-showcase-float-delay-1 {
+  animation: lqShowcaseFloat 3.4s ease-in-out 0.2s infinite;
+}
+
+.lq-showcase-float-delay-2 {
+  animation: lqShowcaseFloat 3.6s ease-in-out 0.5s infinite;
+}
+
+.lq-showcase-stat-card,
+.lq-showcase-feature-card {
+  border: 1px solid rgba(251, 207, 232, 0.55);
+  background: linear-gradient(165deg, rgba(255, 255, 255, 0.96), rgba(255, 248, 252, 0.9));
+  box-shadow:
+    0 10px 32px -14px rgba(244, 114, 182, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+/* html2canvas: strip blur/backdrop on capture clone */
+.lq-export-capture .lq-showcase-stat-card,
+.lq-export-capture .lq-showcase-feature-card,
+.lq-export-capture .lq-showcase-ai-hero,
+.lq-export-capture .lq-showcase-reminder-hero,
+.lq-export-capture .lq-showcase-game-hero {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.lq-export-capture .lq-showcase-orb,
+.lq-export-capture .lq-showcase-sparkle,
+.lq-export-capture .lq-showcase-hero-heart,
+.lq-export-capture .lq-showcase-float-icon {
+  filter: none !important;
+}
+
+.lq-export-capture .lq-showcase-phone-fit {
+  transform: none !important;
+  width: 100% !important;
+}
+
+/* html2canvas：螢幕圓角反鋸齒黑點 */
+.lq-showcase-phone-screen {
+  isolation: isolate;
+  background-color: #fef9fb;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.lq-export-capture .lq-showcase-phone-screen,
+.lq-export-capture .lq-showcase-phone-screen-content {
+  background-color: #fef9fb !important;
+  box-shadow: inset 0 0 0 3px #fef9fb !important;
+}
+
+.lq-export-capture .lq-showcase-canvas-spotlight {
+  opacity: 1;
+}
+
+.lq-export-capture .lq-showcase-floor-glow {
+  opacity: 1;
+}
+
+.lq-showcase-ai-hero {
+  background: linear-gradient(135deg, rgba(255, 241, 246, 0.98), rgba(252, 231, 243, 0.9));
+  border: 1px solid rgba(251, 207, 232, 0.6);
+  box-shadow: 0 12px 36px -14px rgba(244, 114, 182, 0.28);
+}
+
+.lq-showcase-reminder-hero {
+  background: linear-gradient(145deg, #fff5f9, #fce7f3);
+  border: 1px solid rgba(251, 207, 232, 0.65);
+  box-shadow: 0 14px 40px -16px rgba(244, 114, 182, 0.3);
+}
+
+.lq-showcase-rpg-hero {
+  background: linear-gradient(135deg, #fb7185, #f472b6 45%, #ec4899);
+  box-shadow: 0 16px 44px -14px rgba(236, 72, 153, 0.45);
+}
+
+.lq-showcase-progress {
+  background: linear-gradient(90deg, #fecdd3, #fda4af, #fff);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.45);
+}
+
+.lq-showcase-game-hero {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(254, 242, 248, 0.75));
+  border: 1px solid rgba(251, 207, 232, 0.5);
+}
+
+.lq-showcase-cta {
+  background: linear-gradient(90deg, #fb7185, #f472b6, #ec4899);
+  box-shadow: 0 8px 28px -8px rgba(236, 72, 153, 0.45);
+}
+
+.lq-showcase-heart-particle {
+  position: absolute;
+  font-size: 1.25rem;
+  opacity: 0.45;
+  animation: lqShowcaseFloat 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.lq-showcase-heart-particle--1 {
+  top: 12%;
+  right: 8%;
+}
+
+.lq-showcase-heart-particle--2 {
+  top: 28%;
+  left: 6%;
+  animation-delay: 1.2s;
+}
+
+.lq-showcase-mock-app {
+  background: linear-gradient(180deg, #fef9fb 0%, #fceef6 100%);
+}
+
+.lq-showcase-phone {
+  animation: lqShowcasePhoneIn 0.55s ease-out both;
+}
+
+@keyframes lqShowcasePhoneIn {
+  from {
+    opacity: 0;
+    transform: translateY(28px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* LoveQuest — 奶粉白 / 淡粉紫大氣背景（非純白） */
+.lq-app-shell {
+  min-height: 100vh;
+  background-color: #fdf4f8;
+  background-image:
+    radial-gradient(ellipse 110% 75% at 50% -18%, rgba(233, 213, 255, 0.2), transparent 54%),
+    radial-gradient(ellipse 85% 55% at 100% 0%, rgba(251, 182, 206, 0.14), transparent 48%),
+    radial-gradient(ellipse 75% 50% at 0% 28%, rgba(252, 231, 243, 0.4), transparent 52%),
+    linear-gradient(180deg, #fceef6 0%, #fef9fb 40%, #f7f3f6 100%);
+}
+
+/* Bottom tab — active 浮起 + 頂部粉光指示 */
+.lq-nav-tab-active {
+  position: relative;
+}
+
+.lq-nav-tab-active::before {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 50%;
+  width: 28px;
+  height: 3px;
+  transform: translateX(-50%);
+  border-radius: 9999px;
+  background: linear-gradient(
+    90deg,
+    rgba(251, 113, 133, 0.35),
+    rgba(244, 114, 182, 0.85),
+    rgba(251, 113, 133, 0.35)
+  );
+  box-shadow: 0 0 10px rgba(244, 114, 182, 0.45);
+}
+
+/*
+ * Native-like iOS / PWA: form fields ≥16px to avoid Safari focus auto-zoom.
+ * After all Tailwind + @layer so this wins over utilities like text-sm on inputs.
+ */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+input:not([type='checkbox']):not([type='radio']):not([type='hidden']):not([type='range']):not(
+    [type='color']
+  ),
+textarea,
+select {
+  font-size: max(16px, 1rem) !important;
+}
+
+/* App Store screenshot mode — CJK fonts for preview & html2canvas export */
+.app-store-slide,
+.app-store-slide *,
+.app-store-mock-screen,
+.app-store-mock-screen * {
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC',
+    'Segoe UI', sans-serif !important;
+}
+
+/* Launch splash */
+@keyframes splash-content-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.splash-screen__content--enter {
+  animation: splash-content-enter 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.splash-screen__icon-wrap {
+  animation: splash-content-enter 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both;
+}
+
+/* Dinner fate card — 3D flip + shuffle (no extra JS libs) */
+.dinner-fate-scene {
+  min-height: 200px;
+  perspective: 1100px;
+}
+
+.dinner-fate-scene--glow {
+  animation: dinner-fate-glow 1.5s ease-in-out;
+}
+
+.dinner-fate-flip-inner {
+  position: relative;
+  width: 100%;
+  min-height: 200px;
+  transform-style: preserve-3d;
+  transition: transform 0.65s cubic-bezier(0.4, 0.15, 0.2, 1);
+  transform-origin: center center;
+}
+
+.dinner-fate-flip-inner--front {
+  transform: rotateY(0deg);
+}
+
+.dinner-fate-flip-inner--back {
+  transform: rotateY(180deg);
+  animation: dinner-fate-sway 1.5s ease-in-out;
+}
+
+.dinner-fate-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  min-height: 200px;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 24px;
+  padding: 1.35rem 1.1rem;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border: 1px solid rgba(255, 120, 160, 0.14);
+  box-shadow:
+    0 12px 36px -14px rgba(244, 114, 182, 0.22),
+    0 4px 14px -6px rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.92);
+  background: linear-gradient(165deg, #ffffff 0%, #fff8fa 48%, #ffeff4 100%);
+}
+
+.dinner-fate-face--back {
+  transform: rotateY(180deg);
+  background: linear-gradient(165deg, #fff0f5 0%, #ffe4ec 45%, #ffd6e4 100%);
+}
+
+.dinner-fate-face--front {
+  transform: rotateY(0deg);
+}
+
+.dinner-fate-back-pattern {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0.4;
+  background-image:
+    radial-gradient(circle at 22% 28%, rgba(251, 113, 133, 0.14) 0%, transparent 44%),
+    radial-gradient(circle at 78% 72%, rgba(244, 114, 182, 0.1) 0%, transparent 42%),
+    repeating-linear-gradient(
+      -18deg,
+      transparent,
+      transparent 14px,
+      rgba(255, 255, 255, 0.35) 14px,
+      rgba(255, 255, 255, 0.35) 15px
+    );
+  pointer-events: none;
+}
+
+.dinner-fate-dot {
+  display: block;
+  height: 6px;
+  width: 6px;
+  border-radius: 9999px;
+  background: rgba(244, 114, 182, 0.55);
+  animation: dinner-fate-dot 0.9s ease-in-out infinite;
+}
+
+.dinner-fate-dot--delay-1 {
+  animation-delay: 0.15s;
+}
+
+.dinner-fate-dot--delay-2 {
+  animation-delay: 0.3s;
+}
+
+@keyframes dinner-fate-glow {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 0 rgba(251, 113, 133, 0));
+  }
+  50% {
+    filter: drop-shadow(0 0 14px rgba(251, 113, 133, 0.35));
+  }
+}
+
+@keyframes dinner-fate-sway {
+  0%,
+  100% {
+    transform: translateX(0) rotate(0deg);
+  }
+  20% {
+    transform: translateX(-5px) rotate(-1.2deg);
+  }
+  40% {
+    transform: translateX(4px) rotate(0.8deg);
+  }
+  60% {
+    transform: translateX(-3px) rotate(-0.6deg);
+  }
+  80% {
+    transform: translateX(2px) rotate(0.4deg);
+  }
+}
+
+@keyframes dinner-fate-dot {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(0.85);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.splash-screen__status {
+  animation: splash-status-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes splash-status-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Mini game play card — idle / drawing / revealed / completed */
+.game-card-scene {
+  position: relative;
+  width: 100%;
+  min-height: 200px;
+  border-radius: 16px;
+  isolation: isolate;
+}
+
+.game-card-border-glow {
+  position: absolute;
+  inset: -6px;
+  border-radius: 20px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  box-shadow: 0 0 0 0 rgba(251, 113, 133, 0);
+  transition: opacity 0.3s ease;
+}
+
+.game-card-shimmer-border {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  padding: 2px;
+  background: linear-gradient(
+    110deg,
+    rgba(251, 113, 133, 0.45),
+    rgba(216, 180, 254, 0.55),
+    rgba(251, 113, 133, 0.5),
+    rgba(244, 114, 182, 0.45)
+  );
+  background-size: 280% 100%;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  transition: opacity 0.25s ease;
+}
+
+.game-card-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  min-height: 196px;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 2px;
+  width: calc(100% - 4px);
+  border-radius: 14px;
+  padding: 1.35rem 1rem;
+  text-align: center;
+  border: 1px solid rgba(255, 182, 193, 0.45);
+  box-shadow:
+    0 8px 24px -12px rgba(251, 113, 133, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  background: linear-gradient(165deg, #ffffff 0%, #fff9fb 55%, #fff0f5 100%);
+  will-change: auto;
+}
+
+.game-card-emoji {
+  display: block;
+  font-size: 2.5rem;
+  line-height: 1;
+  margin-bottom: 0.65rem;
+}
+
+.game-card-title {
+  margin: 0;
+  max-width: 100%;
+  font-size: 1.125rem;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.game-card-subtitle {
+  margin: 0.35rem 0 0;
+  max-width: 100%;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.game-card-content {
+  margin: 0.75rem 0 0;
+  max-width: 100%;
+  min-height: 4.5rem;
+  padding: 0.85rem 0.75rem;
+  border-radius: 12px;
+  font-size: 1.0625rem;
+  font-weight: 700;
+  line-height: 1.45;
+  background: rgba(255, 241, 245, 0.75);
+}
+
+.game-card-sparkles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  overflow: hidden;
+  border-radius: inherit;
+}
+
+.game-card-sparkles span {
+  position: absolute;
+  font-size: 0.75rem;
+  opacity: 0;
+  animation: game-card-sparkle 0.85s ease-out forwards;
+}
+
+.game-card-sparkles span:nth-child(1) {
+  top: 12%;
+  left: 14%;
+  animation-delay: 0.05s;
+}
+.game-card-sparkles span:nth-child(2) {
+  top: 18%;
+  right: 12%;
+  animation-delay: 0.12s;
+}
+.game-card-sparkles span:nth-child(3) {
+  bottom: 28%;
+  left: 10%;
+  animation-delay: 0.08s;
+}
+.game-card-sparkles span:nth-child(4) {
+  bottom: 22%;
+  right: 14%;
+  animation-delay: 0.15s;
+}
+.game-card-sparkles span:nth-child(5) {
+  top: 42%;
+  right: 22%;
+  animation-delay: 0.1s;
+}
+
+/* idle */
+.game-card--idle .game-card-border-glow {
+  opacity: 0.55;
+  animation: game-card-idle-glow 4.5s ease-in-out infinite;
+}
+
+.game-card--idle .game-card-inner {
+  animation: game-card-idle-shadow 4.5s ease-in-out infinite;
+}
+
+/* drawing */
+.game-card--drawing .game-card-shimmer-border {
+  opacity: 1;
+  animation: game-card-shimmer 1.15s linear infinite;
+}
+
+.game-card--drawing .game-card-border-glow {
+  opacity: 1;
+  animation: game-card-draw-glow 1.15s ease-in-out infinite;
+}
+
+.game-card--drawing .game-card-inner {
+  border-color: rgba(244, 114, 182, 0.35);
+  box-shadow:
+    0 10px 32px -10px rgba(244, 114, 182, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.92);
+}
+
+/* revealed */
+.game-card--revealed .game-card-inner {
+  animation: game-card-reveal-pulse 0.45s ease-out;
+}
+
+/* completed */
+.game-card--completed .game-card-border-glow {
+  opacity: 1;
+  animation: game-card-complete-glow 0.65s ease-out;
+}
+
+.game-card--completed .game-card-inner {
+  animation: game-card-complete-border 0.65s ease-out;
+}
+
+.game-card--completed .game-card-content {
+  opacity: 0.88;
+}
+
+.game-card-emoji--float {
+  animation: game-card-emoji-float 3.2s ease-in-out infinite;
+}
+
+.game-card-emoji--bounce {
+  animation: game-card-emoji-bounce 0.55s ease-in-out infinite;
+}
+
+.game-card-emoji--pop {
+  animation: game-card-emoji-pop 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.game-card-title--pop {
+  animation: game-card-title-pop 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.game-card-title--success {
+  animation: game-card-title-pop 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.game-card-body--rise {
+  animation: game-card-body-rise 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.game-card-content--pop {
+  animation: game-card-title-pop 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.game-card-cta-pulse {
+  animation: game-card-cta-pulse 2.6s ease-in-out infinite;
+}
+
+@keyframes game-card-idle-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 18px -4px rgba(251, 113, 133, 0.12);
+  }
+  50% {
+    box-shadow: 0 0 22px -2px rgba(251, 113, 133, 0.2);
+  }
+}
+
+@keyframes game-card-idle-shadow {
+  0%,
+  100% {
+    box-shadow:
+      0 8px 24px -12px rgba(251, 113, 133, 0.16),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  }
+  50% {
+    box-shadow:
+      0 10px 28px -10px rgba(251, 113, 133, 0.22),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  }
+}
+
+@keyframes game-card-shimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+@keyframes game-card-draw-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 20px -6px rgba(244, 114, 182, 0.25);
+  }
+  50% {
+    box-shadow: 0 0 28px -4px rgba(192, 132, 252, 0.32);
+  }
+}
+
+@keyframes game-card-reveal-pulse {
+  0% {
+    box-shadow:
+      0 0 0 0 rgba(251, 113, 133, 0.35),
+      0 8px 24px -12px rgba(251, 113, 133, 0.2);
+    border-color: rgba(244, 114, 182, 0.55);
+  }
+  100% {
+    box-shadow:
+      0 8px 24px -12px rgba(251, 113, 133, 0.18),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    border-color: rgba(255, 182, 193, 0.45);
+  }
+}
+
+@keyframes game-card-complete-glow {
+  0% {
+    box-shadow: 0 0 26px -4px rgba(251, 191, 36, 0.35);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(251, 191, 36, 0);
+  }
+}
+
+@keyframes game-card-complete-border {
+  0% {
+    border-color: rgba(251, 191, 36, 0.45);
+    box-shadow:
+      0 10px 30px -8px rgba(251, 191, 36, 0.22),
+      inset 0 1px 0 rgba(255, 255, 255, 0.92);
+  }
+  100% {
+    border-color: rgba(255, 182, 193, 0.45);
+    box-shadow:
+      0 8px 24px -12px rgba(251, 113, 133, 0.18),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  }
+}
+
+@keyframes game-card-sparkle {
+  0% {
+    opacity: 0;
+    transform: scale(0.6) translateY(6px);
+  }
+  40% {
+    opacity: 0.45;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1) translateY(-4px);
+  }
+}
+
+@keyframes game-card-emoji-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes game-card-emoji-bounce {
+  0%,
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
+  25% {
+    transform: rotate(-8deg) scale(1.06);
+  }
+  75% {
+    transform: rotate(8deg) scale(1.04);
+  }
+}
+
+@keyframes game-card-emoji-pop {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes game-card-title-pop {
+  0% {
+    transform: scale(0.96);
+    opacity: 0.5;
+  }
+  60% {
+    transform: scale(1.03);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes game-card-body-rise {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes game-card-cta-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 4px 14px -6px rgba(244, 114, 182, 0.35);
+  }
+  50% {
+    transform: scale(1.015);
+    box-shadow: 0 6px 18px -4px rgba(244, 114, 182, 0.42);
+  }
+}
+
+/* AI result reveal — modal 內捲動後的焦點提示 */
+.ai-result-reveal {
+  border-radius: 1rem;
+  transition: box-shadow 0.35s ease;
+}
+
+.ai-result-reveal--highlight {
+  animation: ai-result-glow 2.2s ease-out;
+}
+
+.ai-result-enter {
+  animation: ai-result-fade-scale 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.ai-result-enter-stagger > * {
+  animation: ai-result-fade-scale 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.ai-result-enter-stagger > *:nth-child(1) {
+  animation-delay: 0.04s;
+}
+.ai-result-enter-stagger > *:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.ai-result-enter-stagger > *:nth-child(3) {
+  animation-delay: 0.16s;
+}
+.ai-result-enter-stagger > *:nth-child(4) {
+  animation-delay: 0.22s;
+}
+.ai-result-enter-stagger > *:nth-child(5) {
+  animation-delay: 0.28s;
+}
+.ai-result-enter-stagger > *:nth-child(6) {
+  animation-delay: 0.34s;
+}
+
+.date-plan-enter .date-timeline-item {
+  animation: date-timeline-slide 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.date-plan-enter .date-timeline-item:nth-child(1) {
+  animation-delay: 0.08s;
+}
+.date-plan-enter .date-timeline-item:nth-child(2) {
+  animation-delay: 0.16s;
+}
+.date-plan-enter .date-timeline-item:nth-child(3) {
+  animation-delay: 0.24s;
+}
+.date-plan-enter .date-timeline-item:nth-child(4) {
+  animation-delay: 0.32s;
+}
+
+.date-timeline-node {
+  animation: date-node-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes date-timeline-slide {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes date-node-pulse {
+  0%,
+  100% {
+    box-shadow: 0 4px 14px rgba(244, 114, 182, 0.35);
+  }
+  50% {
+    box-shadow: 0 6px 20px rgba(244, 114, 182, 0.5);
+  }
+}
+
+@keyframes ai-result-fade-scale {
+  from {
+    opacity: 0;
+    transform: scale(0.97) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes ai-result-glow {
+  0% {
+    box-shadow:
+      0 0 0 0 rgba(167, 139, 250, 0.45),
+      0 8px 28px -8px rgba(167, 139, 250, 0.35);
+  }
+  40% {
+    box-shadow:
+      0 0 0 3px rgba(167, 139, 250, 0.2),
+      0 12px 32px -8px rgba(244, 114, 182, 0.28);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(167, 139, 250, 0);
+  }
+}
+
+/* AI 伴侶 App — 二次元深色系 */
+html,
+body {
+  background-color: #07050f;
+}
+
+.companion-app {
+  background-color: #07050f;
+  font-family: system-ui, -apple-system, 'Segoe UI', 'Noto Sans TC', sans-serif;
+}
+
+.companion-bg {
+  background:
+    radial-gradient(ellipse 90% 60% at 50% -8%, rgba(124, 58, 237, 0.35), transparent 55%),
+    radial-gradient(ellipse 70% 50% at 100% 30%, rgba(236, 72, 153, 0.12), transparent 50%),
+    radial-gradient(ellipse 60% 45% at 0% 70%, rgba(56, 189, 248, 0.08), transparent 48%),
+    linear-gradient(180deg, #07050f 0%, #0f0820 45%, #120c22 100%);
+}
+
+.companion-stars {
+  background-image:
+    radial-gradient(1px 1px at 20% 30%, rgba(255, 255, 255, 0.35), transparent),
+    radial-gradient(1px 1px at 60% 18%, rgba(255, 255, 255, 0.25), transparent),
+    radial-gradient(1px 1px at 80% 55%, rgba(255, 255, 255, 0.2), transparent),
+    radial-gradient(1.5px 1.5px at 35% 72%, rgba(196, 181, 253, 0.45), transparent),
+    radial-gradient(1px 1px at 92% 82%, rgba(255, 255, 255, 0.3), transparent);
+  opacity: 0.7;
+}
+
+@keyframes sheetUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

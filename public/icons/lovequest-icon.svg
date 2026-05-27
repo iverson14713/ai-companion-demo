@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="LoveQuest">
+  <defs>
+    <linearGradient id="bg" x1="8%" y1="4%" x2="92%" y2="96%">
+      <stop offset="0%" stop-color="#fce7f3"/>
+      <stop offset="38%" stop-color="#f9a8d4"/>
+      <stop offset="72%" stop-color="#fb7185"/>
+      <stop offset="100%" stop-color="#fde68a"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="512" height="512" fill="url(#bg)"/>
+  <ellipse cx="256" cy="430" rx="200" ry="70" fill="#be185d" opacity="0.1"/>
+
+  <g
+    fill="none"
+    stroke="#ffffff"
+    stroke-width="15"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <!-- 女生（左）：頭 + 裙裝 + 伸手向愛心 -->
+    <circle cx="142" cy="162" r="36"/>
+    <path d="M142 198 L112 302 Q142 314 172 302 L142 198"/>
+    <path d="M172 224 Q200 214 214 244"/>
+
+    <!-- 愛心（中） -->
+    <path
+      stroke-width="14"
+      d="M256 206 C256 186 234 174 220 190 C206 174 184 186 184 206 C184 232 256 278 256 278 C256 278 328 232 328 206 C328 186 306 174 292 190 C278 174 256 186 256 206 Z"
+    />
+
+    <!-- 男生（右）：頭 + 肩線 + 雙腿 + 伸手向愛心 -->
+    <circle cx="370" cy="162" r="36"/>
+    <path d="M338 200 L370 192 L402 200"/>
+    <path d="M350 200 L350 302 M390 200 L390 302"/>
+    <path d="M338 224 Q308 214 298 244"/>
+  </g>
+</svg>
