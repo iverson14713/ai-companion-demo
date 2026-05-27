@@ -1595,9 +1595,29 @@ body {
   pointer-events: none;
 }
 
+.companion-hero-figure {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.companion-hero-float {
+  will-change: transform;
+  animation: companion-float 7s ease-in-out infinite;
+}
+
+.companion-hero-breathe {
+  transform-origin: center 88%;
+  will-change: transform;
+  animation: companion-breathe 5.2s ease-in-out infinite;
+}
+
 .companion-hero-img {
   position: relative;
   z-index: 2;
+  display: block;
   width: 100%;
   max-width: 400px;
   height: auto;
@@ -1605,6 +1625,159 @@ body {
   object-fit: contain;
   object-position: center bottom;
   filter: drop-shadow(0 16px 48px rgba(46, 16, 101, 0.65));
+}
+
+/* 髮絲柔光掠過 */
+.companion-hero-shimmer {
+  position: absolute;
+  top: 6%;
+  left: 12%;
+  right: 12%;
+  height: 42%;
+  z-index: 3;
+  pointer-events: none;
+  background: linear-gradient(
+    118deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.03) 42%,
+    rgba(221, 214, 254, 0.09) 50%,
+    rgba(255, 255, 255, 0.04) 58%,
+    transparent 100%
+  );
+  background-size: 220% 100%;
+  mix-blend-mode: soft-light;
+  animation: companion-hair-shine 10s ease-in-out infinite;
+}
+
+.companion-hero-glow-pulse {
+  animation: companion-glow-pulse 6.5s ease-in-out infinite;
+}
+
+.companion-hero-ambient-drift {
+  animation: companion-moon-drift 14s ease-in-out infinite;
+}
+
+/* 眨眼 overlay（對齊 yuki-main 雙眼） */
+.companion-hero-eyes {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+}
+
+.companion-eye {
+  position: absolute;
+  top: 27.2%;
+  width: 7.5%;
+  height: 3.2%;
+  border-radius: 45% / 50%;
+  background: linear-gradient(
+    180deg,
+    rgba(28, 18, 38, 0.75) 0%,
+    rgba(18, 10, 28, 0.92) 100%
+  );
+  transform-origin: center 35%;
+  transform: scaleY(0);
+  opacity: 0;
+  filter: blur(0.3px);
+}
+
+.companion-eye--left {
+  left: 36.2%;
+}
+
+.companion-eye--right {
+  left: 51.8%;
+}
+
+.companion-eye--blink {
+  animation: companion-eye-blink 0.15s ease-in-out forwards;
+}
+
+@keyframes companion-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -7px, 0);
+  }
+}
+
+@keyframes companion-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.014);
+  }
+}
+
+@keyframes companion-hair-shine {
+  0%,
+  100% {
+    background-position: 120% 0;
+    opacity: 0.55;
+  }
+  50% {
+    background-position: -20% 0;
+    opacity: 1;
+  }
+}
+
+@keyframes companion-glow-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.82;
+    transform: scale(1.03);
+  }
+}
+
+@keyframes companion-moon-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.35;
+  }
+  50% {
+    transform: translate3d(-4px, 3px, 0);
+    opacity: 0.42;
+  }
+}
+
+@keyframes companion-eye-blink {
+  0% {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  42% {
+    transform: scaleY(1);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .companion-hero--live .companion-hero-float,
+  .companion-hero--live .companion-hero-breathe,
+  .companion-hero--live .companion-hero-shimmer,
+  .companion-hero--live .companion-hero-glow-pulse,
+  .companion-hero--live .companion-hero-ambient-drift,
+  .companion-hero--live .companion-eye--blink {
+    animation: none !important;
+  }
+
+  .companion-hero--live .companion-eye {
+    display: none;
+  }
 }
 
 .companion-hero-vignette {
