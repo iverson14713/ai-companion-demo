@@ -1,21 +1,38 @@
 import { useState } from 'react';
 import { BottomNav } from './companion/BottomNav';
+import { CompanionProvider } from './companion/context/CompanionContext';
 import { OverlaySheet } from './companion/OverlaySheet';
-import { COMPANION_PROFILE, MOCK_MEMORIES } from './companion/mockData';
+import { COMPANION_PROFILE } from './companion/mockData';
 import { ChatScreen } from './companion/screens/ChatScreen';
 import { HomeScreen } from './companion/screens/HomeScreen';
+import { MemoryScreen } from './companion/screens/MemoryScreen';
 import { SettingsScreen } from './companion/screens/SettingsScreen';
 import { TasksScreen } from './companion/screens/TasksScreen';
 import type { CompanionTabId } from './companion/theme';
 
-type HomePanel = 'gift' | 'memory' | 'outfit' | null;
+type HomePanel = 'gift' | 'outfit' | null;
 
 const OUTFITS = ['星夜禮服', '櫻花校園', '冬日圍巾', '賽博霓虹'] as const;
 
-export default function App() {
+function CompanionApp() {
   const [tab, setTab] = useState<CompanionTabId>('home');
   const [panel, setPanel] = useState<HomePanel>(null);
   const [outfit, setOutfit] = useState(COMPANION_PROFILE.outfit);
+  const [showMemory, setShowMemory] = useState(false);
+
+  const openMemory = () => setShowMemory(true);
+  const closeMemory = () => setShowMemory(false);
+
+  if (showMemory) {
+    return (
+      <div className="companion-app relative min-h-[100dvh] overflow-x-hidden text-violet-50">
+        <div className="companion-bg pointer-events-none fixed inset-0" aria-hidden />
+        <div className="relative mx-auto max-w-[430px]">
+          <MemoryScreen onBack={closeMemory} />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="companion-app relative min-h-[100dvh] overflow-x-hidden text-violet-50">
@@ -29,21 +46,18 @@ export default function App() {
               outfit={outfit}
               onNavigate={setTab}
               onOpenPanel={(p) => setPanel(p)}
+              onOpenMemory={openMemory}
             />
           )}
           {tab === 'chat' && <ChatScreen />}
           {tab === 'tasks' && <TasksScreen />}
-          {tab === 'settings' && <SettingsScreen />}
+          {tab === 'settings' && <SettingsScreen onOpenMemory={openMemory} />}
         </main>
 
         <BottomNav active={tab} onChange={setTab} />
       </div>
 
-      <OverlaySheet
-        title="送禮物"
-        open={panel === 'gift'}
-        onClose={() => setPanel(null)}
-      >
+      <OverlaySheet title="送禮物" open={panel === 'gift'} onClose={() => setPanel(null)}>
         <p className="mb-3 text-sm text-violet-300/70">選一份禮物表達心意（Demo 無實際扣款）</p>
         <div className="grid grid-cols-3 gap-2">
           {['🌸', '🍫', '🎀', '⭐', '🧸', '💌'].map((emoji) => (
@@ -59,30 +73,7 @@ export default function App() {
         </div>
       </OverlaySheet>
 
-      <OverlaySheet
-        title="回憶"
-        open={panel === 'memory'}
-        onClose={() => setPanel(null)}
-      >
-        <ul className="space-y-2">
-          {MOCK_MEMORIES.map((m) => (
-            <li
-              key={m.id}
-              className="rounded-2xl border border-violet-500/20 bg-white/[0.04] px-4 py-3"
-            >
-              <p className="font-semibold text-violet-100">{m.title}</p>
-              <p className="text-[11px] text-violet-400/65">{m.date}</p>
-            </li>
-          ))}
-        </ul>
-        <p className="mt-3 text-center text-[11px] text-violet-400/50">更多回憶將在正式版解鎖</p>
-      </OverlaySheet>
-
-      <OverlaySheet
-        title="換裝"
-        open={panel === 'outfit'}
-        onClose={() => setPanel(null)}
-      >
+      <OverlaySheet title="換裝" open={panel === 'outfit'} onClose={() => setPanel(null)}>
         <p className="mb-3 text-sm text-violet-300/70">目前穿著：{outfit}</p>
         <ul className="space-y-2">
           {OUTFITS.map((name) => (
@@ -111,5 +102,13 @@ export default function App() {
         </ul>
       </OverlaySheet>
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <CompanionProvider>
+      <CompanionApp />
+    </CompanionProvider>
   );
 }

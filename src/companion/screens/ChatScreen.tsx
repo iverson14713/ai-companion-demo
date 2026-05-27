@@ -1,6 +1,9 @@
 import { AlertCircle, Loader2, Send, Sparkles, X } from 'lucide-react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { CompanionChatError, sendCompanionChat, toApiMessages } from '../api/chat';
+import { useCompanion } from '../context/CompanionContext';
+import { extractMemoryFromUserMessage } from '../lib/extractMemory';
+import { saveToMemoryPayload } from '../lib/memoryPayload';
 import { COMPANION_PROFILE, MOCK_CHAT } from '../mockData';
 
 export type ChatMessage = {
@@ -18,12 +21,21 @@ function newId(prefix: string) {
   return `${prefix}-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
 }
 
+function greetingName(nickname: string, callsUser: string) {
+  if (callsUser) return callsUser;
+  if (nickname) return nickname;
+  return '你';
+}
+
 export function ChatScreen() {
+  const { save, applyUserMessageMemory, rewardChatAffection } = useCompanion();
   const [draft, setDraft] = useState('');
   const [messages, setMessages] = useState<ChatMessage[]>(() => [...MOCK_CHAT]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const listEndRef = useRef<HTMLLIElement>(null);
+
+  const displayName = save.companionCallsUser || save.userNickname;
 
   useEffect(() => {
     listEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -46,9 +58,18 @@ export function ChatScreen() {
     setError(null);
     setLoading(true);
 
+    const extracted = extractMemoryFromUserMessage(text, save);
+    const mergedSave = {
+      ...save,
+      userNickname: extracted.userNickname ?? save.userNickname,
+      preferences: extracted.preferences ?? save.preferences,
+      importantEvents: extracted.importantEvents ?? save.importantEvents,
+    };
+    applyUserMessageMemory(text);
+
     try {
       const apiMessages = toApiMessages(nextMessages);
-      const reply = await sendCompanionChat(apiMessages);
+      const reply = await sendCompanionChat(apiMessages, saveToMemoryPayload(mergedSave));
       setMessages((prev) => [
         ...prev,
         {
@@ -58,6 +79,7 @@ export function ChatScreen() {
           time: formatTime(),
         },
       ]);
+      rewardChatAffection();
     } catch (e) {
       const msg =
         e instanceof CompanionChatError
@@ -69,7 +91,14 @@ export function ChatScreen() {
     } finally {
       setLoading(false);
     }
-  }, [draft, loading, messages]);
+  }, [
+    draft,
+    loading,
+    messages,
+    save,
+    applyUserMessageMemory,
+    rewardChatAffection,
+  ]);
 
   const canSend = draft.trim().length > 0 && !loading;
 
@@ -86,7 +115,11 @@ export function ChatScreen() {
               <span
                 className={`h-1.5 w-1.5 rounded-full ${loading ? 'animate-pulse bg-amber-400' : 'bg-emerald-400'}`}
               />
-              {loading ? '小雪正在輸入…' : '線上'}
+              {loading
+                ? '小雪正在輸入…'
+                : displayName
+                  ? `記得${greetingName(save.userNickname, save.companionCallsUser)}`
+                  : '線上'}
             </p>
           </div>
         </div>
@@ -180,7 +213,7 @@ export function ChatScreen() {
           </button>
         </div>
         <p className="mt-2 text-center text-[10px] text-violet-400/50">
-          由伺服器代叫 OpenAI · 保留最近 10 則對話
+          角色設定 + 本機記憶 + 最近 10 則 · 聊天 +{1}～3 好感
         </p>
       </div>
     </div>

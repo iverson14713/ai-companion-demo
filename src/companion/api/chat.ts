@@ -1,3 +1,5 @@
+import type { CompanionMemoryPayload } from '../storage/types';
+
 export type ChatApiRole = 'user' | 'assistant';
 
 export type ChatApiMessage = {
@@ -18,11 +20,14 @@ export class CompanionChatError extends Error {
 type ChatSuccess = { reply: string };
 type ChatFailure = { error?: string; code?: string };
 
-export async function sendCompanionChat(messages: ChatApiMessage[]): Promise<string> {
+export async function sendCompanionChat(
+  messages: ChatApiMessage[],
+  memory?: CompanionMemoryPayload
+): Promise<string> {
   const res = await fetch('/api/chat', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ messages }),
+    body: JSON.stringify({ messages, memory: memory ?? {} }),
   });
 
   let data: ChatSuccess & ChatFailure;

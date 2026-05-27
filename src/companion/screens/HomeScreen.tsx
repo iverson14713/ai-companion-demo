@@ -1,16 +1,30 @@
-import { Bell, Gift, Heart, MessageCircle, Shirt, Sparkles, Star } from 'lucide-react';
+import { Bell, Brain, Gift, Heart, MessageCircle, Shirt, Sparkles } from 'lucide-react';
 import { CharacterStage } from '../CharacterStage';
+import { useCompanion } from '../context/CompanionContext';
+import { affectionToLevel } from '../storage/companionStore';
 import { COMPANION_PROFILE } from '../mockData';
 import type { CompanionTabId } from '../theme';
 
 type Props = {
   outfit: string;
   onNavigate: (tab: CompanionTabId) => void;
-  onOpenPanel: (panel: 'gift' | 'memory' | 'outfit') => void;
+  onOpenPanel: (panel: 'gift' | 'outfit') => void;
+  onOpenMemory: () => void;
 };
 
-export function HomeScreen({ outfit, onNavigate, onOpenPanel }: Props) {
-  const { name, title, level, affection, mood, moodEmoji, tagline } = COMPANION_PROFILE;
+export function HomeScreen({ outfit, onNavigate, onOpenPanel, onOpenMemory }: Props) {
+  const { save, affection } = useCompanion();
+  const { name, title, mood, moodEmoji, tagline } = COMPANION_PROFILE;
+  const level = affectionToLevel(affection);
+  const memoryCount =
+    save.preferences.length +
+    save.importantEvents.length +
+    (save.userNickname ? 1 : 0) +
+    (save.companionCallsUser ? 1 : 0);
+
+  const personalizedTagline = save.userNickname
+    ? `${save.userNickname}，${tagline}`
+    : tagline;
 
   return (
     <div className="page-tab-fade flex flex-col gap-4 px-4 pb-28 pt-2">
@@ -50,7 +64,7 @@ export function HomeScreen({ outfit, onNavigate, onOpenPanel }: Props) {
             style={{ width: `${affection}%` }}
           />
         </div>
-        <p className="mt-2 text-[11px] text-violet-300/55">再聊幾句，就能解鎖新的互動語音（Demo）</p>
+        <p className="mt-2 text-[11px] text-violet-300/55">多聊聊天，好感會慢慢提升</p>
       </section>
 
       <section className="flex gap-3">
@@ -63,7 +77,9 @@ export function HomeScreen({ outfit, onNavigate, onOpenPanel }: Props) {
           </span>
         </div>
         <div className="flex flex-1 flex-col justify-center rounded-2xl border border-violet-500/15 bg-white/[0.03] px-3 py-3">
-          <p className="text-[11px] leading-relaxed text-violet-200/75">&ldquo;{tagline}&rdquo;</p>
+          <p className="text-[11px] leading-relaxed text-violet-200/75">
+            &ldquo;{personalizedTagline}&rdquo;
+          </p>
         </div>
       </section>
 
@@ -88,11 +104,11 @@ export function HomeScreen({ outfit, onNavigate, onOpenPanel }: Props) {
             onClick={() => onOpenPanel('gift')}
           />
           <QuickAction
-            icon={Star}
-            label="回憶"
-            sub="珍藏時刻"
+            icon={Brain}
+            label="記憶"
+            sub={memoryCount > 0 ? `${memoryCount} 項記得` : '看看記住什麼'}
             accent="from-indigo-600/35 to-violet-600/25"
-            onClick={() => onOpenPanel('memory')}
+            onClick={onOpenMemory}
           />
           <QuickAction
             icon={Shirt}
