@@ -58,7 +58,8 @@ export function SettingsScreen() {
           <div>
             <p className="text-sm font-semibold text-violet-100">AI 伴侶 Demo</p>
             <p className="mt-1 text-[12px] leading-relaxed text-violet-300/60">
-              第一版僅前端 UI，未連接 Supabase、OpenAI 或後端 API。資料皆保存在本機記憶體中。
+              聊天已透過伺服器 /api/chat 連接 OpenAI（Key 僅在後端）。其餘功能仍為本地 Demo，未接
+              Supabase。
             </p>
             <p className="mt-2 text-[11px] text-violet-400/45">v0.1.0 · {new Date().getFullYear()}</p>
           </div>
