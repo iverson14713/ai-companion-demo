@@ -1545,153 +1545,193 @@ body {
   box-shadow: 0 4px 24px rgba(88, 28, 135, 0.2);
 }
 
-/* 角色主視覺 */
+/* 角色主視覺 — 單圖陪伴（裁切設定集區塊） */
 .companion-hero {
   position: relative;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
+  width: 100%;
   overflow: hidden;
 }
 
 .companion-hero--large {
-  min-height: min(58vh, 420px);
-  max-height: 460px;
+  flex: 1;
+  min-height: 0;
 }
 
 .companion-hero--compact {
-  min-height: 200px;
-  max-height: 240px;
+  height: 200px;
 }
 
-.companion-hero-moon {
+.companion-hero-ambient {
   position: absolute;
-  top: 8%;
-  right: 12%;
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, #faf5ff, #c4b5fd 45%, transparent 70%);
-  opacity: 0.35;
-  filter: blur(2px);
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .companion-hero-glow {
   position: absolute;
-  inset: 10% 5% 0;
-  background: radial-gradient(ellipse 70% 55% at 50% 85%, rgba(109, 40, 217, 0.55), transparent 68%);
-  pointer-events: none;
+  inset: 15% 0 5%;
+  background: radial-gradient(ellipse 75% 60% at 50% 72%, rgba(109, 40, 217, 0.4), transparent 70%);
+  animation: companion-glow-breathe 8s ease-in-out infinite;
 }
 
-.companion-hero-floor {
+.companion-hero-moon {
   position: absolute;
-  bottom: 0;
-  left: 50%;
-  width: 85%;
-  height: 12%;
-  transform: translateX(-50%);
-  background: radial-gradient(ellipse 100% 100% at 50% 100%, rgba(167, 139, 250, 0.25), transparent 70%);
-  filter: blur(12px);
-  pointer-events: none;
+  top: 6%;
+  right: 10%;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #faf5ff, #c4b5fd 40%, transparent 68%);
+  opacity: 0.28;
+  filter: blur(3px);
+  animation: companion-moon-drift 16s ease-in-out infinite;
 }
 
-.companion-hero-figure {
+.companion-hero-clip {
   position: relative;
-  z-index: 2;
-  display: flex;
+  z-index: 1;
+  height: 100%;
   width: 100%;
-  justify-content: center;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 78%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 78%, transparent 100%);
 }
 
-.companion-hero-float {
-  will-change: transform;
-  animation: companion-float 7s ease-in-out infinite;
-}
-
-.companion-hero-breathe {
-  transform-origin: center 88%;
-  will-change: transform;
-  animation: companion-breathe 5.2s ease-in-out infinite;
+.companion-hero-motion {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-origin: center 82%;
+  animation: companion-float 8s ease-in-out infinite, companion-breathe 5.5s ease-in-out infinite;
 }
 
 .companion-hero-img {
-  position: relative;
-  z-index: 2;
   display: block;
+  width: 108%;
+  max-width: none;
+  height: 108%;
+  margin-left: -4%;
+  object-fit: cover;
+  /* 對齊主插畫，裁掉下方表情縮圖列 */
+  object-position: center 6%;
+  filter: drop-shadow(0 20px 50px rgba(30, 10, 60, 0.55));
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* 面部柔光輕閃 — 模擬慢速眨眼感，不切換圖片 */
+.companion-hero-face-light {
+  position: absolute;
+  top: 14%;
+  left: 22%;
+  width: 56%;
+  height: 18%;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.07), transparent 72%);
+  animation: companion-soft-blink 5.8s ease-in-out infinite;
+}
+
+.companion-hero-fade {
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 2;
+  height: 45%;
+  background: linear-gradient(to top, #06040c 8%, rgba(6, 4, 12, 0.85) 45%, transparent);
+  pointer-events: none;
+}
+
+/* 首頁陪伴布局 */
+.companion-home {
+  display: flex;
+  flex-direction: column;
+}
+
+.companion-home-header {
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+.companion-presence-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #6ee7b7;
+  box-shadow: 0 0 8px rgba(110, 231, 183, 0.55);
+  animation: companion-presence-pulse 3s ease-in-out infinite;
+}
+
+.companion-home-stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.companion-home-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  padding: 0 1.25rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.companion-home-whisper {
+  text-align: center;
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  color: rgba(237, 233, 254, 0.82);
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.5);
+}
+
+.companion-home-affection {
+  padding: 0.625rem 0.75rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+}
+
+.companion-home-affection-track {
+  margin-top: 0.375rem;
+  height: 4px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.companion-home-affection-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #6d28d9, #c084fc, #f9a8d4);
+  box-shadow: 0 0 12px rgba(244, 114, 182, 0.35);
+  transition: width 0.7s ease;
+}
+
+.companion-home-cta {
+  display: flex;
   width: 100%;
-  max-width: 400px;
-  height: auto;
-  max-height: 100%;
-  object-fit: contain;
-  object-position: center bottom;
-  filter: drop-shadow(0 16px 48px rgba(46, 16, 101, 0.65));
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1rem;
+  border-radius: 1rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(135deg, rgba(109, 40, 217, 0.95), rgba(168, 85, 247, 0.9));
+  box-shadow: 0 8px 28px rgba(88, 28, 135, 0.45);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-/* 髮絲柔光掠過 */
-.companion-hero-shimmer {
-  position: absolute;
-  top: 6%;
-  left: 12%;
-  right: 12%;
-  height: 42%;
-  z-index: 3;
-  pointer-events: none;
-  background: linear-gradient(
-    118deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.03) 42%,
-    rgba(221, 214, 254, 0.09) 50%,
-    rgba(255, 255, 255, 0.04) 58%,
-    transparent 100%
-  );
-  background-size: 220% 100%;
-  mix-blend-mode: soft-light;
-  animation: companion-hair-shine 10s ease-in-out infinite;
-}
-
-.companion-hero-glow-pulse {
-  animation: companion-glow-pulse 6.5s ease-in-out infinite;
-}
-
-.companion-hero-ambient-drift {
-  animation: companion-moon-drift 14s ease-in-out infinite;
-}
-
-/* 眨眼 overlay（對齊 yuki-main 雙眼） */
-.companion-hero-eyes {
-  position: absolute;
-  inset: 0;
-  z-index: 6;
-  pointer-events: none;
-}
-
-.companion-eye {
-  position: absolute;
-  top: 27.2%;
-  width: 7.5%;
-  height: 3.2%;
-  border-radius: 45% / 50%;
-  background: linear-gradient(
-    180deg,
-    rgba(28, 18, 38, 0.75) 0%,
-    rgba(18, 10, 28, 0.92) 100%
-  );
-  transform-origin: center 35%;
-  transform: scaleY(0);
-  opacity: 0;
-  filter: blur(0.3px);
-}
-
-.companion-eye--left {
-  left: 36.2%;
-}
-
-.companion-eye--right {
-  left: 51.8%;
-}
-
-.companion-eye--blink {
-  animation: companion-eye-blink 0.15s ease-in-out forwards;
+.companion-home-cta:active {
+  transform: scale(0.98);
 }
 
 @keyframes companion-float {
@@ -1700,7 +1740,7 @@ body {
     transform: translate3d(0, 0, 0);
   }
   50% {
-    transform: translate3d(0, -7px, 0);
+    transform: translate3d(0, -5px, 0);
   }
 }
 
@@ -1710,31 +1750,30 @@ body {
     transform: scale(1);
   }
   50% {
-    transform: scale(1.014);
+    transform: scale(1.008);
   }
 }
 
-@keyframes companion-hair-shine {
+@keyframes companion-soft-blink {
   0%,
+  92%,
   100% {
-    background-position: 120% 0;
-    opacity: 0.55;
+    opacity: 0.35;
+    transform: scaleY(1);
   }
-  50% {
-    background-position: -20% 0;
-    opacity: 1;
+  96% {
+    opacity: 0.08;
+    transform: scaleY(0.92);
   }
 }
 
-@keyframes companion-glow-pulse {
+@keyframes companion-glow-breathe {
   0%,
   100% {
-    opacity: 1;
-    transform: scale(1);
+    opacity: 0.9;
   }
   50% {
-    opacity: 0.82;
-    transform: scale(1.03);
+    opacity: 0.65;
   }
 }
 
@@ -1742,81 +1781,30 @@ body {
   0%,
   100% {
     transform: translate3d(0, 0, 0);
-    opacity: 0.35;
   }
   50% {
-    transform: translate3d(-4px, 3px, 0);
-    opacity: 0.42;
+    transform: translate3d(-3px, 2px, 0);
   }
 }
 
-@keyframes companion-eye-blink {
-  0% {
-    transform: scaleY(0);
-    opacity: 0;
-  }
-  42% {
-    transform: scaleY(1);
-    opacity: 0.9;
-  }
+@keyframes companion-presence-pulse {
+  0%,
   100% {
-    transform: scaleY(0);
-    opacity: 0;
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .companion-hero--live .companion-hero-float,
-  .companion-hero--live .companion-hero-breathe,
-  .companion-hero--live .companion-hero-shimmer,
-  .companion-hero--live .companion-hero-glow-pulse,
-  .companion-hero--live .companion-hero-ambient-drift,
-  .companion-hero--live .companion-eye--blink {
+  .companion-hero-motion,
+  .companion-hero-glow,
+  .companion-hero-moon,
+  .companion-hero-face-light,
+  .companion-presence-dot {
     animation: none !important;
   }
-
-  .companion-hero--live .companion-eye {
-    display: none;
-  }
-}
-
-.companion-hero-vignette {
-  position: absolute;
-  inset: 0;
-  z-index: 3;
-  background: linear-gradient(
-    180deg,
-    transparent 0%,
-    transparent 55%,
-    rgba(6, 4, 12, 0.35) 78%,
-    rgba(6, 4, 12, 0.92) 100%
-  );
-  pointer-events: none;
-}
-
-.companion-hero-badge {
-  position: absolute;
-  bottom: 2.5rem;
-  left: 50%;
-  z-index: 4;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.125rem;
-  pointer-events: none;
-}
-
-.companion-hero-badge-name {
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  color: rgba(237, 233, 254, 0.85);
-}
-
-.companion-hero-badge-outfit {
-  font-size: 0.65rem;
-  color: rgba(196, 181, 253, 0.55);
 }
 
 .companion-avatar-ring {
