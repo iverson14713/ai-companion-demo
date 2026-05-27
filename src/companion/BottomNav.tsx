@@ -16,7 +16,7 @@ type Props = {
 export function BottomNav({ active, onChange }: Props) {
   return (
     <nav
-      className="fixed bottom-0 left-0 right-0 z-50 mx-auto max-w-[430px] border-t border-violet-500/20 bg-[#0a0614]/92 px-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] pt-2 backdrop-blur-xl"
+      className="companion-nav fixed bottom-0 left-0 right-0 z-50 mx-auto max-w-[430px] border-t px-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] pt-2 backdrop-blur-xl"
       aria-label="主要導覽"
     >
       <ul className="flex items-stretch justify-around gap-1">

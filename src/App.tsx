@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { BottomNav } from './companion/BottomNav';
 import { CompanionProvider } from './companion/context/CompanionContext';
 import { OverlaySheet } from './companion/OverlaySheet';
-import { COMPANION_PROFILE } from './companion/mockData';
+import { YUKI_PROFILE } from './companion/character/yukiProfile';
 import { ChatScreen } from './companion/screens/ChatScreen';
 import { HomeScreen } from './companion/screens/HomeScreen';
 import { MemoryScreen } from './companion/screens/MemoryScreen';
@@ -12,12 +12,12 @@ import type { CompanionTabId } from './companion/theme';
 
 type HomePanel = 'gift' | 'outfit' | null;
 
-const OUTFITS = ['星夜禮服', '櫻花校園', '冬日圍巾', '賽博霓虹'] as const;
+const OUTFITS = ['夜色居家', '星夜禮服', '櫻花校園', '冬日圍巾', '賽博霓虹'] as const;
 
 function CompanionApp() {
   const [tab, setTab] = useState<CompanionTabId>('home');
   const [panel, setPanel] = useState<HomePanel>(null);
-  const [outfit, setOutfit] = useState(COMPANION_PROFILE.outfit);
+  const [outfit, setOutfit] = useState(YUKI_PROFILE.outfitDefault);
   const [showMemory, setShowMemory] = useState(false);
 
   const openMemory = () => setShowMemory(true);

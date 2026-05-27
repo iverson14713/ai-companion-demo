@@ -1470,33 +1470,268 @@ select {
   }
 }
 
-/* AI 伴侶 App — 二次元深色系 */
+/* AI 伴侶 App — 小雪 · 深夜陪伴色調 */
 html,
 body {
-  background-color: #07050f;
+  background-color: #06040c;
 }
 
 .companion-app {
-  background-color: #07050f;
+  background-color: #06040c;
   font-family: system-ui, -apple-system, 'Segoe UI', 'Noto Sans TC', sans-serif;
+  color: #f5f3ff;
 }
 
 .companion-bg {
   background:
-    radial-gradient(ellipse 90% 60% at 50% -8%, rgba(124, 58, 237, 0.35), transparent 55%),
-    radial-gradient(ellipse 70% 50% at 100% 30%, rgba(236, 72, 153, 0.12), transparent 50%),
-    radial-gradient(ellipse 60% 45% at 0% 70%, rgba(56, 189, 248, 0.08), transparent 48%),
-    linear-gradient(180deg, #07050f 0%, #0f0820 45%, #120c22 100%);
+    radial-gradient(ellipse 100% 70% at 50% -5%, rgba(109, 40, 217, 0.42), transparent 58%),
+    radial-gradient(ellipse 55% 45% at 95% 25%, rgba(244, 114, 182, 0.1), transparent 50%),
+    radial-gradient(ellipse 50% 40% at 5% 60%, rgba(67, 56, 202, 0.18), transparent 48%),
+    radial-gradient(ellipse 80% 50% at 50% 100%, rgba(15, 8, 28, 0.95), transparent 70%),
+    linear-gradient(180deg, #06040c 0%, #0c0618 38%, #120a22 100%);
 }
 
 .companion-stars {
   background-image:
-    radial-gradient(1px 1px at 20% 30%, rgba(255, 255, 255, 0.35), transparent),
-    radial-gradient(1px 1px at 60% 18%, rgba(255, 255, 255, 0.25), transparent),
-    radial-gradient(1px 1px at 80% 55%, rgba(255, 255, 255, 0.2), transparent),
-    radial-gradient(1.5px 1.5px at 35% 72%, rgba(196, 181, 253, 0.45), transparent),
-    radial-gradient(1px 1px at 92% 82%, rgba(255, 255, 255, 0.3), transparent);
-  opacity: 0.7;
+    radial-gradient(1px 1px at 18% 22%, rgba(255, 255, 255, 0.45), transparent),
+    radial-gradient(1px 1px at 72% 15%, rgba(255, 255, 255, 0.3), transparent),
+    radial-gradient(1.5px 1.5px at 45% 68%, rgba(196, 181, 253, 0.5), transparent),
+    radial-gradient(1px 1px at 88% 78%, rgba(255, 255, 255, 0.25), transparent),
+    radial-gradient(2px 2px at 30% 45%, rgba(167, 139, 250, 0.35), transparent);
+  opacity: 0.75;
+}
+
+/* 玻璃卡片 */
+.companion-glass {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.09) 0%,
+    rgba(255, 255, 255, 0.03) 48%,
+    rgba(88, 28, 135, 0.08) 100%
+  );
+  backdrop-filter: blur(20px) saturate(1.2);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.companion-glass-glow {
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.35),
+    0 0 40px rgba(109, 40, 217, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14);
+}
+
+.companion-action-tile {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem;
+  border-radius: 1rem;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02));
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  backdrop-filter: blur(12px);
+  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.companion-action-tile:active {
+  transform: scale(0.98);
+}
+
+.companion-action-tile:hover {
+  border-color: rgba(167, 139, 250, 0.35);
+  box-shadow: 0 4px 24px rgba(88, 28, 135, 0.2);
+}
+
+/* 角色主視覺 */
+.companion-hero {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.companion-hero--large {
+  min-height: min(58vh, 420px);
+  max-height: 460px;
+}
+
+.companion-hero--compact {
+  min-height: 200px;
+  max-height: 240px;
+}
+
+.companion-hero-moon {
+  position: absolute;
+  top: 8%;
+  right: 12%;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #faf5ff, #c4b5fd 45%, transparent 70%);
+  opacity: 0.35;
+  filter: blur(2px);
+}
+
+.companion-hero-glow {
+  position: absolute;
+  inset: 10% 5% 0;
+  background: radial-gradient(ellipse 70% 55% at 50% 85%, rgba(109, 40, 217, 0.55), transparent 68%);
+  pointer-events: none;
+}
+
+.companion-hero-floor {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 85%;
+  height: 12%;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse 100% 100% at 50% 100%, rgba(167, 139, 250, 0.25), transparent 70%);
+  filter: blur(12px);
+  pointer-events: none;
+}
+
+.companion-hero-img {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  max-height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+  filter: drop-shadow(0 16px 48px rgba(46, 16, 101, 0.65));
+}
+
+.companion-hero-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    transparent 55%,
+    rgba(6, 4, 12, 0.35) 78%,
+    rgba(6, 4, 12, 0.92) 100%
+  );
+  pointer-events: none;
+}
+
+.companion-hero-badge {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  z-index: 4;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.125rem;
+  pointer-events: none;
+}
+
+.companion-hero-badge-name {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: rgba(237, 233, 254, 0.85);
+}
+
+.companion-hero-badge-outfit {
+  font-size: 0.65rem;
+  color: rgba(196, 181, 253, 0.55);
+}
+
+.companion-avatar-ring {
+  box-shadow:
+    0 0 0 2px rgba(167, 139, 250, 0.35),
+    0 4px 16px rgba(0, 0, 0, 0.35);
+}
+
+.companion-affection-bar {
+  background: linear-gradient(90deg, #6d28d9 0%, #a855f7 42%, #f472b6 100%);
+  box-shadow: 0 0 16px rgba(244, 114, 182, 0.45);
+}
+
+/* 聊天頁 */
+.companion-chat {
+  background: linear-gradient(180deg, rgba(12, 6, 24, 0.6) 0%, rgba(6, 4, 12, 0.95) 100%);
+}
+
+.companion-chat-header {
+  background: linear-gradient(180deg, rgba(12, 6, 24, 0.95), rgba(12, 6, 24, 0.7));
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(16px);
+}
+
+.companion-chat-messages {
+  background-image: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(109, 40, 217, 0.08), transparent 60%);
+}
+
+.companion-bubble-yuki {
+  border-radius: 1.25rem 1.25rem 1.25rem 0.35rem;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(88, 28, 135, 0.12));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ede9fe;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(8px);
+}
+
+.companion-bubble-user {
+  border-radius: 1.25rem 1.25rem 0.35rem 1.25rem;
+  background: linear-gradient(135deg, #5b21b6 0%, #7c3aed 50%, #a855f7 100%);
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(88, 28, 135, 0.35);
+}
+
+.companion-chat-composer {
+  background: rgba(8, 5, 16, 0.92);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(20px);
+}
+
+.companion-chat-input {
+  border-radius: 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  color: #f5f3ff;
+}
+
+.companion-chat-input::placeholder {
+  color: rgba(167, 139, 250, 0.45);
+}
+
+.companion-chat-input:focus {
+  border-color: rgba(167, 139, 250, 0.45);
+  box-shadow: 0 0 0 3px rgba(109, 40, 217, 0.2);
+}
+
+.companion-send-btn {
+  border-radius: 1.25rem;
+  background: linear-gradient(135deg, #6d28d9, #a855f7);
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(109, 40, 217, 0.4);
+}
+
+.companion-error-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(244, 63, 94, 0.35);
+  background: rgba(244, 63, 94, 0.12);
+  padding: 0.625rem 0.75rem;
+  font-size: 0.8125rem;
+  color: #fecdd3;
+}
+
+.companion-nav {
+  background: rgba(8, 5, 16, 0.88) !important;
+  border-top-color: rgba(255, 255, 255, 0.08) !important;
 }
 
 @keyframes sheetUp {

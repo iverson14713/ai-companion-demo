@@ -1,7 +1,9 @@
 import { ArrowLeft, Brain, Calendar, Heart, Sparkles, Trash2, User } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { useCompanion } from '../context/CompanionContext';
-import { COMPANION_PROFILE } from '../mockData';
+import { CharacterAvatar } from '../CharacterStage';
+import { YUKI_PROFILE } from '../character/yukiProfile';
+import { GlassCard } from '../components/GlassCard';
 
 type Props = {
   onBack: () => void;
@@ -26,20 +28,25 @@ export function MemoryScreen({ onBack }: Props) {
         </button>
         <div>
           <h1 className="text-base font-bold text-violet-50">記憶卡片</h1>
-          <p className="text-[11px] text-violet-400/65">{COMPANION_PROFILE.name} 目前記得的事</p>
+          <p className="text-[11px] text-violet-400/65">{YUKI_PROFILE.name} 目前記得的事</p>
         </div>
       </header>
 
       <div className="flex-1 space-y-4 px-4 py-4">
-        <div className="rounded-2xl border border-violet-500/25 bg-gradient-to-br from-violet-600/20 to-fuchsia-600/10 p-4">
-          <div className="flex items-center gap-2 text-sm font-semibold text-violet-100">
-            <Brain className="h-5 w-5 text-violet-300" />
-            共 {memoryCount} 項記憶
+        <GlassCard glow className="p-4">
+          <div className="flex items-center gap-3">
+            <CharacterAvatar size={40} />
+            <div>
+              <div className="flex items-center gap-2 text-sm font-semibold text-violet-100">
+                <Brain className="h-4 w-4 text-violet-300" />
+                共 {memoryCount} 項記憶
+              </div>
+              <p className="mt-1 text-[12px] leading-relaxed text-violet-300/65">
+                聊天時會一併送給 AI，讓小雪更懂你。
+              </p>
+            </div>
           </div>
-          <p className="mt-1 text-[12px] leading-relaxed text-violet-300/65">
-            聊天時會一併送給 AI，讓小雪更懂您。可在設定中編輯稱呼或清除記憶。
-          </p>
-        </div>
+        </GlassCard>
 
         <MemorySection icon={User} title="你是誰">
           <MemoryRow label="你的暱稱" value={userNickname || '（尚未設定）'} empty={!userNickname} />
@@ -122,13 +129,13 @@ function MemorySection({
   children: ReactNode;
 }) {
   return (
-    <section className="overflow-hidden rounded-2xl border border-violet-500/20 bg-white/[0.03]">
+    <GlassCard className="overflow-hidden">
       <h2 className="flex items-center gap-2 border-b border-violet-500/10 px-4 py-2.5 text-sm font-semibold text-violet-100">
         <Icon className="h-4 w-4 text-violet-400" />
         {title}
       </h2>
       <div className="px-4 py-3">{children}</div>
-    </section>
+    </GlassCard>
   );
 }
 

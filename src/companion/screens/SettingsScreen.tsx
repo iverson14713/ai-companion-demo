@@ -1,8 +1,10 @@
 import { Brain, ChevronRight, Info, Moon, Trash2, Volume2, Vibrate } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { CharacterAvatar } from '../CharacterStage';
+import { YUKI_PROFILE } from '../character/yukiProfile';
+import { GlassCard } from '../components/GlassCard';
 import { useCompanion } from '../context/CompanionContext';
 import { affectionToLevel } from '../storage/companionStore';
-import { COMPANION_PROFILE } from '../mockData';
 
 type Props = {
   onOpenMemory: () => void;
@@ -47,21 +49,20 @@ export function SettingsScreen({ onOpenMemory }: Props) {
         <p className="text-sm text-violet-300/65">個人化你的伴侶體驗</p>
       </header>
 
-      <section className="mb-4 overflow-hidden rounded-2xl border border-violet-500/20 bg-white/[0.04]">
-        <div className="flex items-center gap-3 border-b border-violet-500/10 px-4 py-4">
-          <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-600 to-fuchsia-600 text-2xl">
-            ✦
-          </div>
+      <GlassCard className="mb-4 overflow-hidden">
+        <div className="flex items-center gap-3 px-4 py-4">
+          <CharacterAvatar size={56} />
           <div>
-            <p className="font-bold text-violet-50">{COMPANION_PROFILE.name}</p>
+            <p className="font-bold text-violet-50">{YUKI_PROFILE.name}</p>
             <p className="text-xs text-violet-300/60">
               Lv.{level} · 好感 {affection}%
             </p>
+            <p className="mt-0.5 text-[10px] text-violet-400/50">{YUKI_PROFILE.about}</p>
           </div>
         </div>
-      </section>
+      </GlassCard>
 
-      <section className="mb-4 overflow-hidden rounded-2xl border border-violet-500/20 bg-white/[0.04]">
+      <GlassCard className="mb-4 overflow-hidden">
         <p className="px-4 pt-3 text-[10px] font-semibold uppercase tracking-wider text-violet-400/70">
           稱呼
         </p>
@@ -85,9 +86,9 @@ export function SettingsScreen({ onOpenMemory }: Props) {
             className="mt-1 w-full rounded-xl border border-violet-500/20 bg-white/[0.05] px-3 py-2 text-sm text-violet-50 outline-none focus:border-violet-400/45"
           />
         </label>
-      </section>
+      </GlassCard>
 
-      <section className="mb-4 overflow-hidden rounded-2xl border border-violet-500/20 bg-white/[0.04]">
+      <GlassCard className="mb-4 overflow-hidden">
         <p className="px-4 pt-3 text-[10px] font-semibold uppercase tracking-wider text-violet-400/70">
           記憶
         </p>
@@ -119,18 +120,18 @@ export function SettingsScreen({ onOpenMemory }: Props) {
             {confirmClear ? '再按一次確認清除喜好與事件' : '清除記憶（保留稱呼與好感）'}
           </span>
         </button>
-      </section>
+      </GlassCard>
 
-      <section className="mb-4 overflow-hidden rounded-2xl border border-violet-500/20 bg-white/[0.04]">
+      <GlassCard className="mb-4 overflow-hidden">
         <p className="px-4 pt-3 text-[10px] font-semibold uppercase tracking-wider text-violet-400/70">
           偏好
         </p>
         <ToggleRow icon={Volume2} label="音效" checked={soundOn} onChange={setSoundOn} />
         <ToggleRow icon={Vibrate} label="觸覺回饋" checked={hapticOn} onChange={setHapticOn} />
         <ToggleRow icon={Moon} label="深色介面" checked={nightMode} onChange={setNightMode} />
-      </section>
+      </GlassCard>
 
-      <section className="overflow-hidden rounded-2xl border border-violet-500/20 bg-white/[0.04]">
+      <GlassCard className="overflow-hidden">
         <div className="flex items-start gap-3 px-4 py-4">
           <Info className="mt-0.5 h-5 w-5 shrink-0 text-violet-400" />
           <div>
@@ -141,7 +142,7 @@ export function SettingsScreen({ onOpenMemory }: Props) {
             <p className="mt-2 text-[11px] text-violet-400/45">v0.2.0 · {new Date().getFullYear()}</p>
           </div>
         </div>
-      </section>
+      </GlassCard>
     </div>
   );
 }
