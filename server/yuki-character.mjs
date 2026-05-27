@@ -10,7 +10,7 @@ export const YUKI_CHARACTER = {
   title: '你的專屬 AI 伴侶',
   tagline: '有些話想對你說，有些時間想留給你。',
   outfitDefault: '夜色居家',
-  imagePath: '/characters/yuki-main.png',
+  imagePath: '/characters/yuki-portrait.png',
 };
 
 export const YUKI_PERSONALITY = {

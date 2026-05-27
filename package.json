@@ -11,6 +11,7 @@
     "verify:cloud-sync": "node scripts/verify-cloud-sync.mjs",
     "generate:icons": "node scripts/generate-icons.mjs",
     "build": "vite build",
+    "portrait:crop": "node scripts/crop-yuki-portrait.mjs",
     "build:capacitor": "vite build --mode capacitor",
     "build:ios": "npm run build:capacitor && npx cap sync ios",
     "cap:sync": "npm run build:capacitor && npx cap sync",

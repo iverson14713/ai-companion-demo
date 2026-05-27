@@ -1,6 +1,7 @@
-/** 小雪（Yuki）— 前端角色設定（與 server/yuki-character.mjs 同步） */
+/** 小雪（Yuki）— 前端角色設定 */
 
-export const YUKI_IMAGE = '/characters/yuki-main.png';
+/** 單一人像裁切圖（勿使用含設定集／表情列的 yuki-main） */
+export const YUKI_IMAGE = '/characters/yuki-portrait.png';
 
 export const YUKI_PROFILE = {
   name: '小雪',

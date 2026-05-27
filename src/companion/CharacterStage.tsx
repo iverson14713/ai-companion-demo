@@ -4,46 +4,34 @@ type Props = {
   variant?: 'hero' | 'compact';
 };
 
-/**
- * 單一主角色圖 — 裁切掉設定集／表情列，僅保留陪伴構圖。
- * 動畫：微浮動、微呼吸、整體柔光（不切換圖片、不疊假眼皮）。
- */
+/** 單一人像 — 僅 yuki-portrait.png，無多圖、無表情庫 */
 export function CharacterStage({ variant = 'hero' }: Props) {
   const isHero = variant === 'hero';
 
   return (
     <div
-      className={`companion-hero ${isHero ? 'companion-hero--large companion-hero--presence' : 'companion-hero--compact'}`}
-      role="img"
-      aria-label={`${YUKI_PROFILE.name}正在陪你`}
+      className={`companion-hero ${isHero ? 'companion-hero--large' : 'companion-hero--compact'}`}
     >
       <div className="companion-hero-ambient" aria-hidden>
         <div className="companion-hero-glow" />
-        <div className="companion-hero-moon" />
       </div>
 
-      <div className="companion-hero-clip">
-        <div className="companion-hero-motion">
-          <img
-            src={YUKI_IMAGE}
-            alt=""
-            className="companion-hero-img"
-            width={640}
-            height={800}
-            decoding="async"
-            fetchPriority={isHero ? 'high' : 'auto'}
-            draggable={false}
-          />
-          <div className="companion-hero-face-light" aria-hidden />
-        </div>
+      <div className="companion-hero-motion">
+        <img
+          src={YUKI_IMAGE}
+          alt={YUKI_PROFILE.name}
+          className="companion-hero-img"
+          width={606}
+          height={757}
+          decoding="async"
+          fetchPriority={isHero ? 'high' : 'auto'}
+          draggable={false}
+        />
       </div>
-
-      <div className="companion-hero-fade" aria-hidden />
     </div>
   );
 }
 
-/** 聊天／設定用小頭像 */
 export function CharacterAvatar({ size = 44 }: { size?: number }) {
   return (
     <div
@@ -53,7 +41,7 @@ export function CharacterAvatar({ size = 44 }: { size?: number }) {
       <img
         src={YUKI_IMAGE}
         alt={YUKI_PROFILE.name}
-        className="h-full w-full object-cover object-[center_15%]"
+        className="h-full w-full object-cover object-[center_22%]"
         width={size}
         height={size}
         draggable={false}

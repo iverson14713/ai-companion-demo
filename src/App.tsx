@@ -30,12 +30,7 @@ function CompanionApp() {
 
       <div className="relative mx-auto flex min-h-[100dvh] max-w-[430px] flex-col">
         <main className="flex min-h-0 flex-1 flex-col">
-          {tab === 'home' && (
-            <HomeScreen
-              onNavigate={setTab}
-              onOpenMemory={() => setShowMemory(true)}
-            />
-          )}
+          {tab === 'home' && <HomeScreen onNavigate={setTab} />}
           {tab === 'chat' && <ChatScreen />}
           {tab === 'tasks' && <TasksScreen />}
           {tab === 'settings' && <SettingsScreen onOpenMemory={() => setShowMemory(true)} />}
